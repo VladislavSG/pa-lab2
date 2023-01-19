@@ -1,12 +1,22 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("no-stack-protector")
+#pragma GCC optimize("unroll-loops")
+#pragma GCC target("sse,sse2,sse3,ssse3,popcnt,abm,mmx")
+#pragma GCC optimize("fast-math")
+
 #include "graph.h"
+
+std::size_t cube_graph::step_size(uint32_t vertex, uint32_t delta) const {
+    return std::size_t(vertex >= delta) + std::size_t(vertex + delta < side3_length);
+}
 
 void cube_graph::step(std::vector<uint32_t> &res, uint32_t vertex, uint32_t delta) const {
     if (vertex >= delta) {
-        res.push_back(vertex - delta);
+        res.emplace_back(vertex - delta);
     }
     uint32_t sum = vertex + delta;
     if (sum < side3_length) {
-        res.push_back(sum);
+        res.emplace_back(sum);
     }
 }
 
@@ -26,4 +36,10 @@ std::vector<uint32_t> cube_graph::neighbors(uint32_t v) const {
     step(res, v, side_length);
     step(res, v, side2_length);
     return res;
+}
+
+std::size_t cube_graph::neighbors_size(uint32_t v) const {
+    return step_size(v, 1)
+         + step_size(v, side_length)
+         + step_size(v, side2_length);
 }

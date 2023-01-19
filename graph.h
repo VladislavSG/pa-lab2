@@ -11,6 +11,7 @@ public:
     [[nodiscard]] virtual std::size_t size() const = 0;
 
     [[nodiscard]] virtual std::vector<uint32_t> neighbors(uint32_t v) const = 0;
+    [[nodiscard]] virtual std::size_t neighbors_size(uint32_t v) const = 0;
 };
 
 class cube_graph : public graph {
@@ -18,6 +19,7 @@ class cube_graph : public graph {
     uint32_t const side2_length;
     uint32_t const side3_length;
 
+    std::size_t step_size(uint32_t vertex, uint32_t delta) const;
     void step(std::vector<uint32_t> &res, uint32_t vertex, uint32_t delta) const;
 
 public:
@@ -26,4 +28,5 @@ public:
     [[nodiscard]] std::size_t size() const override;
 
     [[nodiscard]] std::vector<uint32_t> neighbors(uint32_t v) const override;
+    [[nodiscard]]  std::size_t neighbors_size(uint32_t v) const override;
 };
