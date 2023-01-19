@@ -1,8 +1,7 @@
-# pa-lab2
-Parallel Algos. Lab2
+# Program output:
 
-par = 1.8669
+par = 2.19892
 
-seq = 1.08733
+seq = 3.62385
 
-Speedup ratio = 0.582425
+Speedup ratio = 1.64802
